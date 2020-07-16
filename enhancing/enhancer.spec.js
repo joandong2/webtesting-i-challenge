@@ -5,6 +5,8 @@ const items = [
     { name: "Broad Sword", durability: 55, enhancement: 16 },
     { name: "Battle Fury", durability: -3, enhancement: -2 },
     { name: "Bracer", durability: "fasd", enhancement: "abc" },
+    { name: "Perseverance", durability: 77, enhancement: 18 },
+    { name: "Tango", durability: 77, enhancement: 20 },
 ];
 
 test("successfully enhances an item", () => {
@@ -19,6 +21,11 @@ test("successfully enhances an item", () => {
         enhancement: 0,
     });
     expect(() => enhancer.succeed(items[2])).toThrow();
+    expect(enhancer.succeed(items[4])).toEqual({
+        name: "Tango",
+        durability: 77,
+        enhancement: 20,
+    });
 });
 
 test("enahancement failed", () => {
@@ -33,6 +40,11 @@ test("enahancement failed", () => {
         enhancement: 0,
     });
     expect(() => enhancer.fail(items[2])).toThrow();
+    expect(enhancer.fail(items[3])).toEqual({
+        name: "Perseverance",
+        durability: 67,
+        enhancement: 17,
+    });
 });
 
 test("repair an item", () => {
